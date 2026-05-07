@@ -10,7 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { TopNav } from "@/components/layout/TopNav";
-import { Footer } from "@/components/layout/Footer";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -88,10 +88,10 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
+      <div className="mx-auto flex min-h-screen max-w-2xl flex-col bg-background/40">
         <TopNav />
-        <main className="flex-1"><Outlet /></main>
-        <Footer />
+        <main className="flex-1 pb-24"><Outlet /></main>
+        <BottomNav />
       </div>
       <Toaster />
     </QueryClientProvider>
