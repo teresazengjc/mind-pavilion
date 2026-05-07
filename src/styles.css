@@ -35,9 +35,9 @@
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-cream: var(--cream);
-  --font-serif: "Cormorant Garamond", "Noto Serif SC", ui-serif, Georgia, serif;
-  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
-  --font-cn-serif: "Noto Serif SC", "Cormorant Garamond", serif;
+  --font-serif: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-cn-serif: SimHei, "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
 }
 
 :root {
@@ -82,11 +82,22 @@
       radial-gradient(at 90% 10%, color-mix(in oklab, var(--gold) 12%, transparent) 0, transparent 50%);
     background-attachment: fixed;
   }
-  h1, h2, h3, .font-serif { font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.01em; }
-  .zh { font-family: var(--font-cn-serif); letter-spacing: 0.04em; }
+  h1, h2, h3, .font-serif { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.01em; }
+  .zh, :lang(zh) { font-family: var(--font-cn-serif); letter-spacing: 0.02em; }
   .paper {
     background-color: var(--card);
     background-image:
       repeating-linear-gradient(0deg, color-mix(in oklab, var(--ink) 2%, transparent) 0 1px, transparent 1px 3px);
+  }
+
+  /* Language modes */
+  html.lang-en .zh { display: none !important; }
+  html.lang-zh *:not(.zh):has(+ .zh) { display: none !important; }
+  html.lang-zh .zh {
+    color: inherit !important;
+    opacity: 1 !important;
+    font-size: 1em !important;
+    margin-top: 0 !important;
+    font-weight: inherit !important;
   }
 }
