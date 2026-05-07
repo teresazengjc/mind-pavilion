@@ -1,106 +1,208 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MessageCircle, Users, Quote as QuoteIcon, BookHeart } from "lucide-react";
-import { BiText } from "@/components/common/BiText";
-import { PavilionMark } from "@/components/common/PavilionMark";
+import { Search, MessageCircle, BookOpen, Users, Bookmark, UserCircle2, Flame, ArrowRight, Sparkles } from "lucide-react";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { thinkers } from "@/data/thinkers";
+import { hotQuestions, debateTopics, readingPaths } from "@/data/feedData";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "问思阁 | Mind Agora — Where your questions meet great minds" },
-      { name: "description", content: "A quiet digital pavilion to think with philosophers, writers, artists, and scientists. Build your personal book of thought." },
-      { property: "og:title", content: "问思阁 | Mind Agora" },
-      { property: "og:description", content: "Where your questions meet great minds. 让你的问题与伟大思想相遇。" },
+      { title: "问思前人 · Great Minds — Mind Agora" },
+      { name: "description", content: "Bring your questions into a quiet pavilion of great minds." },
+      { property: "og:title", content: "问思前人 · Mind Agora" },
     ],
   }),
-  component: Landing,
+  component: HomePage,
 });
 
-const features = [
-  { to: "/great-minds", icon: MessageCircle, en: "Great Minds Chat", zh: "与巨人对话", descEn: "Talk with philosophers, writers, artists, and scientists.", descZh: "与哲学家、作家、艺术家和科学家对话。" },
-  { to: "/debate", icon: Users, en: "Debate Room", zh: "思想辩论厅", descEn: "Watch great minds discuss one question from different perspectives.", descZh: "观看不同思想人物从多个角度讨论同一个问题。" },
-  { to: "/quotes", icon: QuoteIcon, en: "Quote Mode", zh: "原著引用模式", descEn: "Receive answers grounded in original quotes from books and texts.", descZh: "通过书籍与文本中的原句获得回应。" },
-  { to: "/thought-book", icon: BookHeart, en: "My Thought Book", zh: "我的思想之书", descEn: "Save quotes, write reflections, and build your personal book of thought.", descZh: "收藏句子，写下反思，建立属于自己的思想之书。" },
+const quickEntries = [
+  { to: "/great-minds", icon: MessageCircle, en: "AI Great Minds Chat", zh: "AI 前人对话", tone: "mist" },
+  { to: "/quotes", icon: BookOpen, en: "Original Text Dialogue", zh: "前人原文", tone: "sage" },
+  { to: "/debate", icon: Users, en: "Debate Room", zh: "前人辩论室", tone: "gold" },
+  { to: "/library", icon: Bookmark, en: "Saved Quotes", zh: "前人金句", tone: "mist" },
+  { to: "/great-minds", icon: UserCircle2, en: "Thinker Profile", zh: "前人画像", tone: "sage" },
 ] as const;
 
-function Landing() {
+function toneBg(tone: string) {
+  if (tone === "sage") return "bg-[var(--sage)]/20 text-[color:var(--ink)]";
+  if (tone === "gold") return "bg-[var(--gold)]/22 text-[color:var(--ink)]";
+  return "bg-[var(--mist)]/45 text-[color:var(--ink)]";
+}
+
+function HomePage() {
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10" style={{ background: "var(--gradient-pavilion)" }} />
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
-          <div>
-            <div className="mb-6 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              <PavilionMark className="text-primary/70" size={20} /> A quiet digital pavilion
-            </div>
-            <h1 className="font-serif text-5xl leading-[1.05] text-foreground md:text-6xl">
-              Where your questions <br />meet great minds.
-            </h1>
-            <p className="zh mt-4 text-xl text-muted-foreground">让你的问题与伟大思想相遇。</p>
-            <div className="mt-8 max-w-xl space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>Bring your inner questions into a quiet space of great minds. Talk with philosophers, writers, artists, and scientists. Collect meaningful quotes, write your own reflections, and build your personal book of thought.</p>
-              <p className="zh text-[13px] leading-loose">把你心中的问题带入一个安静的思想空间。与哲学家、作家、艺术家和科学家对话。收藏有意义的句子，写下自己的反思，并建立一本属于自己的思想之书。</p>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Link to="/great-minds" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:translate-y-[-1px]">
-                <PavilionMark size={18} /> Enter the Pavilion
-                <span className="zh text-xs opacity-80">进入问思阁</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link to="/ask" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-6 py-3 text-sm text-foreground backdrop-blur transition-all hover:bg-card">
-                <MessageCircle className="h-4 w-4" /> Start with a Question
-                <span className="zh text-xs text-muted-foreground">从一个问题开始</span>
-              </Link>
-            </div>
-          </div>
-          <div className="relative mx-auto aspect-square w-full max-w-md">
-            <div className="absolute inset-0 rounded-[2rem]" style={{ background: "var(--gradient-soft)", boxShadow: "var(--shadow-paper)" }} />
-            <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full p-10 text-primary/40">
-              <path d="M80 320 Q200 60 320 320" fill="none" stroke="currentColor" strokeWidth="1" />
-              <path d="M120 320 L120 200 Q200 140 280 200 L280 320" fill="none" stroke="currentColor" strokeWidth="1.2" />
-              <circle cx="200" cy="160" r="24" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-              <line x1="60" y1="340" x2="340" y2="340" stroke="currentColor" strokeWidth="1" />
-              <line x1="40" y1="360" x2="360" y2="360" stroke="currentColor" strokeWidth="0.6" opacity="0.5" />
-              <path d="M50 380 Q200 360 350 380" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
-            </svg>
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-              <div className="font-serif text-sm text-primary/70">问思阁</div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Mind Agora</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader en="Great Minds" zh="问思前人" subtitleEn="Where your questions meet great minds." subtitleZh="让你的问题与伟大思想相遇。" />
 
-      {/* Distinction */}
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center">
-        <p className="font-serif text-2xl text-foreground md:text-3xl">Not another reading app. Not another chatbot.</p>
-        <p className="zh mt-2 text-base text-muted-foreground">不是另一个读书软件，也不是另一个聊天机器人。</p>
-        <p className="mt-6 text-base text-muted-foreground">Reading apps start from books. Mind Agora starts from your questions.</p>
-        <p className="zh mt-1 text-sm text-muted-foreground/80">读书软件从书开始。问思阁从你的问题开始。</p>
-      </section>
+      {/* Search */}
+      <div className="px-5">
+        <Link
+          to="/ask"
+          className="flex items-center gap-2.5 rounded-2xl border border-border bg-card/80 px-4 py-3.5 shadow-[var(--shadow-soft)] transition-all hover:bg-card"
+        >
+          <Search className="h-4 w-4 text-muted-foreground" />
+          <div className="flex-1 truncate text-[13px] text-muted-foreground">
+            What is on your mind today?
+            <span className="zh ml-1.5 text-muted-foreground/70">今天想问什么？</span>
+          </div>
+          <Sparkles className="h-4 w-4 text-primary/70" />
+        </Link>
+      </div>
 
-      {/* Features */}
-      <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {features.map((f) => (
+      {/* Quick entries */}
+      <section className="mt-5 px-5">
+        <div className="grid grid-cols-3 gap-2.5">
+          {quickEntries.slice(0, 3).map((q) => (
             <Link
-              key={f.to}
-              to={f.to}
-              className="group flex flex-col gap-3 rounded-2xl border border-border bg-card/70 p-6 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+              key={q.en}
+              to={q.to}
+              className="flex aspect-square flex-col items-start justify-between rounded-2xl border border-border bg-card/70 p-3 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <f.icon className="h-5 w-5" />
+              <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl", toneBg(q.tone))}>
+                <q.icon className="h-[18px] w-[18px]" />
               </div>
-              <BiText en={f.en} zh={f.zh} as="h3" serif className="text-lg" />
-              <p className="text-sm text-muted-foreground">{f.descEn}</p>
-              <p className="zh text-xs text-muted-foreground/80">{f.descZh}</p>
-              <span className="mt-auto inline-flex items-center gap-1 text-xs text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                Open <ArrowRight className="h-3 w-3" />
-              </span>
+              <div>
+                <div className="text-[11px] font-medium leading-tight">{q.en}</div>
+                <div className="zh mt-0.5 text-[10px] leading-tight text-muted-foreground">{q.zh}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+          {quickEntries.slice(3).map((q) => (
+            <Link
+              key={q.en}
+              to={q.to}
+              className="flex items-center gap-2.5 rounded-2xl border border-border bg-card/70 p-3 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+            >
+              <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-xl", toneBg(q.tone))}>
+                <q.icon className="h-[18px] w-[18px]" />
+              </div>
+              <div className="min-w-0">
+                <div className="truncate text-[12px] font-medium">{q.en}</div>
+                <div className="zh truncate text-[10px] text-muted-foreground">{q.zh}</div>
+              </div>
             </Link>
           ))}
         </div>
       </section>
+
+      {/* Thinker carousel */}
+      <section className="mt-7">
+        <SectionTitle en="Recommended Thinkers" zh="前人推荐" />
+        <div className="-mx-1 mt-3 flex gap-3 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {thinkers.map((t) => (
+            <Link
+              key={t.id}
+              to="/great-minds"
+              className="group flex w-[150px] shrink-0 flex-col gap-2 rounded-2xl border border-border bg-card/70 p-4 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+            >
+              <div className={cn("flex h-12 w-12 items-center justify-center rounded-full font-serif text-xl", toneBg(t.tone))}>
+                {t.initial}
+              </div>
+              <div>
+                <div className="font-serif text-[15px] leading-tight">{t.en}</div>
+                <div className="zh text-[11px] text-muted-foreground">{t.zh}</div>
+              </div>
+              <p className="line-clamp-2 text-[10.5px] leading-snug text-muted-foreground">{t.styleEn}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Hot questions */}
+      <section className="mt-7 px-5">
+        <SectionTitle en="Hot Questions" zh="热门问题" inline />
+        <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card/70">
+          {hotQuestions.map((q, i) => (
+            <Link
+              key={q.en}
+              to="/ask"
+              className="flex items-start gap-3 border-b border-border/60 px-4 py-3 last:border-0 transition-colors hover:bg-accent/30"
+            >
+              <div className={cn(
+                "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-serif text-[12px]",
+                i < 3 ? "bg-[var(--gold)]/30 text-[color:var(--ink)]" : "bg-muted text-muted-foreground"
+              )}>
+                {i + 1}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-[13px] leading-snug">{q.en}</div>
+                <div className="zh mt-0.5 text-[11.5px] leading-snug text-muted-foreground">{q.zh}</div>
+              </div>
+              <div className="flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground">
+                <Flame className="h-3 w-3" /> {q.count}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Debate ranking */}
+      <section className="mt-7 px-5">
+        <SectionTitle en="Debate Topics" zh="辩论话题" inline />
+        <div className="mt-3 grid gap-2.5">
+          {debateTopics.map((d) => (
+            <Link
+              key={d.en}
+              to="/debate"
+              className="flex items-center gap-3 rounded-2xl border border-border bg-card/70 p-3.5 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+            >
+              <div className="flex shrink-0 -space-x-2">
+                {d.thinkers.map((id) => {
+                  const t = thinkers.find((x) => x.id === id);
+                  if (!t) return null;
+                  return (
+                    <div key={id} className={cn("flex h-8 w-8 items-center justify-center rounded-full border-2 border-card font-serif text-[12px]", toneBg(t.tone))}>
+                      {t.initial}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-[13px] font-medium leading-tight">{d.en}</div>
+                <div className="zh mt-0.5 text-[11px] leading-tight text-muted-foreground">{d.zh}</div>
+              </div>
+              <div className="flex items-center gap-1 rounded-full bg-[var(--gold)]/20 px-2 py-0.5 text-[10px] text-[color:var(--ink)]">
+                <Flame className="h-2.5 w-2.5" /> {d.heat}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Reading paths */}
+      <section className="mt-7 px-5">
+        <SectionTitle en="Reading Paths" zh="阅读路径" inline />
+        <div className="mt-3 grid grid-cols-2 gap-2.5">
+          {readingPaths.map((p) => (
+            <Link
+              key={p.en}
+              to="/reading-path"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card/70 p-4 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+            >
+              <div className={cn("absolute -right-4 -top-4 h-16 w-16 rounded-full opacity-50", toneBg(p.color))} />
+              <div className="relative">
+                <div className="font-serif text-[15px] leading-tight">{p.en}</div>
+                <div className="zh mt-0.5 text-[11.5px] text-muted-foreground">{p.zh}</div>
+                <div className="mt-3 inline-flex items-center gap-1 text-[10.5px] text-muted-foreground">
+                  {p.count} books · 本书 <ArrowRight className="h-3 w-3" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function SectionTitle({ en, zh, inline }: { en: string; zh: string; inline?: boolean }) {
+  return (
+    <div className={cn("flex items-baseline gap-2", !inline && "px-5")}>
+      <h2 className="font-serif text-[17px]">{en}</h2>
+      <span className="zh text-[12px] text-muted-foreground">{zh}</span>
     </div>
   );
 }
