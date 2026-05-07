@@ -9,8 +9,62 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThoughtsRouteImport } from './routes/thoughts'
+import { Route as ThoughtBookRouteImport } from './routes/thought-book'
+import { Route as ReflectionRouteImport } from './routes/reflection'
+import { Route as ReadingPathRouteImport } from './routes/reading-path'
+import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as GreatMindsRouteImport } from './routes/great-minds'
+import { Route as DebateRouteImport } from './routes/debate'
+import { Route as AskRouteImport } from './routes/ask'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ThoughtsRoute = ThoughtsRouteImport.update({
+  id: '/thoughts',
+  path: '/thoughts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThoughtBookRoute = ThoughtBookRouteImport.update({
+  id: '/thought-book',
+  path: '/thought-book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReflectionRoute = ReflectionRouteImport.update({
+  id: '/reflection',
+  path: '/reflection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReadingPathRoute = ReadingPathRouteImport.update({
+  id: '/reading-path',
+  path: '/reading-path',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuotesRoute = QuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GreatMindsRoute = GreatMindsRouteImport.update({
+  id: '/great-minds',
+  path: '/great-minds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DebateRoute = DebateRouteImport.update({
+  id: '/debate',
+  path: '/debate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AskRoute = AskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +73,158 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/debate': typeof DebateRoute
+  '/great-minds': typeof GreatMindsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/quotes': typeof QuotesRoute
+  '/reading-path': typeof ReadingPathRoute
+  '/reflection': typeof ReflectionRoute
+  '/thought-book': typeof ThoughtBookRoute
+  '/thoughts': typeof ThoughtsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/debate': typeof DebateRoute
+  '/great-minds': typeof GreatMindsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/quotes': typeof QuotesRoute
+  '/reading-path': typeof ReadingPathRoute
+  '/reflection': typeof ReflectionRoute
+  '/thought-book': typeof ThoughtBookRoute
+  '/thoughts': typeof ThoughtsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/debate': typeof DebateRoute
+  '/great-minds': typeof GreatMindsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/quotes': typeof QuotesRoute
+  '/reading-path': typeof ReadingPathRoute
+  '/reflection': typeof ReflectionRoute
+  '/thought-book': typeof ThoughtBookRoute
+  '/thoughts': typeof ThoughtsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ask'
+    | '/debate'
+    | '/great-minds'
+    | '/how-it-works'
+    | '/quotes'
+    | '/reading-path'
+    | '/reflection'
+    | '/thought-book'
+    | '/thoughts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ask'
+    | '/debate'
+    | '/great-minds'
+    | '/how-it-works'
+    | '/quotes'
+    | '/reading-path'
+    | '/reflection'
+    | '/thought-book'
+    | '/thoughts'
+  id:
+    | '__root__'
+    | '/'
+    | '/ask'
+    | '/debate'
+    | '/great-minds'
+    | '/how-it-works'
+    | '/quotes'
+    | '/reading-path'
+    | '/reflection'
+    | '/thought-book'
+    | '/thoughts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AskRoute: typeof AskRoute
+  DebateRoute: typeof DebateRoute
+  GreatMindsRoute: typeof GreatMindsRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  QuotesRoute: typeof QuotesRoute
+  ReadingPathRoute: typeof ReadingPathRoute
+  ReflectionRoute: typeof ReflectionRoute
+  ThoughtBookRoute: typeof ThoughtBookRoute
+  ThoughtsRoute: typeof ThoughtsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thoughts': {
+      id: '/thoughts'
+      path: '/thoughts'
+      fullPath: '/thoughts'
+      preLoaderRoute: typeof ThoughtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thought-book': {
+      id: '/thought-book'
+      path: '/thought-book'
+      fullPath: '/thought-book'
+      preLoaderRoute: typeof ThoughtBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reflection': {
+      id: '/reflection'
+      path: '/reflection'
+      fullPath: '/reflection'
+      preLoaderRoute: typeof ReflectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reading-path': {
+      id: '/reading-path'
+      path: '/reading-path'
+      fullPath: '/reading-path'
+      preLoaderRoute: typeof ReadingPathRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quotes': {
+      id: '/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof QuotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/great-minds': {
+      id: '/great-minds'
+      path: '/great-minds'
+      fullPath: '/great-minds'
+      preLoaderRoute: typeof GreatMindsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/debate': {
+      id: '/debate'
+      path: '/debate'
+      fullPath: '/debate'
+      preLoaderRoute: typeof DebateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ask': {
+      id: '/ask'
+      path: '/ask'
+      fullPath: '/ask'
+      preLoaderRoute: typeof AskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +237,26 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AskRoute: AskRoute,
+  DebateRoute: DebateRoute,
+  GreatMindsRoute: GreatMindsRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  QuotesRoute: QuotesRoute,
+  ReadingPathRoute: ReadingPathRoute,
+  ReflectionRoute: ReflectionRoute,
+  ThoughtBookRoute: ThoughtBookRoute,
+  ThoughtsRoute: ThoughtsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
