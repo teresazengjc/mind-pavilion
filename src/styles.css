@@ -92,7 +92,7 @@
 
   /* Language modes */
   html.lang-en .zh { display: none !important; }
-  html.lang-zh *:has(> .zh:first-child:last-child) { display: none !important; }
+  html.lang-zh *:has(> .zh + *), html.lang-zh *:has(+ .zh) { /* placeholder */ }
   html.lang-zh *:has(+ .zh) { display: none !important; }
-  html.lang-zh .zh { color: var(--foreground) !important; opacity: 1 !important; font-size: 1em !important; margin-top: 0 !important; }
+  html.lang-zh .zh { color: inherit !important; opacity: 1 !important; font-size: 1em !important; margin-top: 0 !important; font-weight: inherit !important; }
 }
