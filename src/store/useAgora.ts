@@ -12,7 +12,11 @@ export type SavedQuote = {
 
 export type SavedThought = { id: string; text: string; createdAt: number };
 
+export type Lang = "both" | "en" | "zh";
+
 type State = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
   currentQuestion: string;
   currentQuestionZh: string;
   selectedCategory: string | null;
@@ -32,6 +36,8 @@ type State = {
 export const useAgora = create<State>()(
   persist(
     (set, get) => ({
+      lang: "both",
+      setLang: (lang) => set({ lang }),
       currentQuestion: "I feel lost about my future. Should I choose stability or freedom?",
       currentQuestionZh: "我对未来感到迷茫。我应该选择稳定，还是选择自由？",
       selectedCategory: null,
