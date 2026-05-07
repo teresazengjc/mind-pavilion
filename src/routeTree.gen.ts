@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThoughtsRouteImport } from './routes/thoughts'
 import { Route as ThoughtBookRouteImport } from './routes/thought-book'
+import { Route as SelfRouteImport } from './routes/self'
 import { Route as ReflectionRouteImport } from './routes/reflection'
 import { Route as ReadingPathRouteImport } from './routes/reading-path'
 import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as LibraryRouteImport } from './routes/library'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as GreatMindsRouteImport } from './routes/great-minds'
 import { Route as DebateRouteImport } from './routes/debate'
+import { Route as CircleRouteImport } from './routes/circle'
 import { Route as AskRouteImport } from './routes/ask'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -28,6 +31,11 @@ const ThoughtsRoute = ThoughtsRouteImport.update({
 const ThoughtBookRoute = ThoughtBookRouteImport.update({
   id: '/thought-book',
   path: '/thought-book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelfRoute = SelfRouteImport.update({
+  id: '/self',
+  path: '/self',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReflectionRoute = ReflectionRouteImport.update({
@@ -45,6 +53,11 @@ const QuotesRoute = QuotesRouteImport.update({
   path: '/quotes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
@@ -58,6 +71,11 @@ const GreatMindsRoute = GreatMindsRouteImport.update({
 const DebateRoute = DebateRouteImport.update({
   id: '/debate',
   path: '/debate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CircleRoute = CircleRouteImport.update({
+  id: '/circle',
+  path: '/circle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AskRoute = AskRouteImport.update({
@@ -74,24 +92,30 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
+  '/circle': typeof CircleRoute
   '/debate': typeof DebateRoute
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/library': typeof LibraryRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
+  '/self': typeof SelfRoute
   '/thought-book': typeof ThoughtBookRoute
   '/thoughts': typeof ThoughtsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
+  '/circle': typeof CircleRoute
   '/debate': typeof DebateRoute
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/library': typeof LibraryRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
+  '/self': typeof SelfRoute
   '/thought-book': typeof ThoughtBookRoute
   '/thoughts': typeof ThoughtsRoute
 }
@@ -99,12 +123,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
+  '/circle': typeof CircleRoute
   '/debate': typeof DebateRoute
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/library': typeof LibraryRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
+  '/self': typeof SelfRoute
   '/thought-book': typeof ThoughtBookRoute
   '/thoughts': typeof ThoughtsRoute
 }
@@ -113,36 +140,45 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/ask'
+    | '/circle'
     | '/debate'
     | '/great-minds'
     | '/how-it-works'
+    | '/library'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
+    | '/self'
     | '/thought-book'
     | '/thoughts'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/ask'
+    | '/circle'
     | '/debate'
     | '/great-minds'
     | '/how-it-works'
+    | '/library'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
+    | '/self'
     | '/thought-book'
     | '/thoughts'
   id:
     | '__root__'
     | '/'
     | '/ask'
+    | '/circle'
     | '/debate'
     | '/great-minds'
     | '/how-it-works'
+    | '/library'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
+    | '/self'
     | '/thought-book'
     | '/thoughts'
   fileRoutesById: FileRoutesById
@@ -150,12 +186,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AskRoute: typeof AskRoute
+  CircleRoute: typeof CircleRoute
   DebateRoute: typeof DebateRoute
   GreatMindsRoute: typeof GreatMindsRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  LibraryRoute: typeof LibraryRoute
   QuotesRoute: typeof QuotesRoute
   ReadingPathRoute: typeof ReadingPathRoute
   ReflectionRoute: typeof ReflectionRoute
+  SelfRoute: typeof SelfRoute
   ThoughtBookRoute: typeof ThoughtBookRoute
   ThoughtsRoute: typeof ThoughtsRoute
 }
@@ -174,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/thought-book'
       fullPath: '/thought-book'
       preLoaderRoute: typeof ThoughtBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/self': {
+      id: '/self'
+      path: '/self'
+      fullPath: '/self'
+      preLoaderRoute: typeof SelfRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reflection': {
@@ -197,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
@@ -216,6 +269,13 @@ declare module '@tanstack/react-router' {
       path: '/debate'
       fullPath: '/debate'
       preLoaderRoute: typeof DebateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/circle': {
+      id: '/circle'
+      path: '/circle'
+      fullPath: '/circle'
+      preLoaderRoute: typeof CircleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ask': {
@@ -238,12 +298,15 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AskRoute: AskRoute,
+  CircleRoute: CircleRoute,
   DebateRoute: DebateRoute,
   GreatMindsRoute: GreatMindsRoute,
   HowItWorksRoute: HowItWorksRoute,
+  LibraryRoute: LibraryRoute,
   QuotesRoute: QuotesRoute,
   ReadingPathRoute: ReadingPathRoute,
   ReflectionRoute: ReflectionRoute,
+  SelfRoute: SelfRoute,
   ThoughtBookRoute: ThoughtBookRoute,
   ThoughtsRoute: ThoughtsRoute,
 }
