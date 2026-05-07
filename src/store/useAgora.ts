@@ -36,7 +36,7 @@ type State = {
 export const useAgora = create<State>()(
   persist(
     (set, get) => ({
-      lang: "both",
+      lang: "en",
       setLang: (lang) => set({ lang }),
       currentQuestion: "I feel lost about my future. Should I choose stability or freedom?",
       currentQuestionZh: "我对未来感到迷茫。我应该选择稳定，还是选择自由？",
