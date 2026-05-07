@@ -92,6 +92,7 @@
 
   /* Language modes */
   html.lang-en .zh { display: none !important; }
-  html.lang-zh :is(p, span, div, h1, h2, h3, h4, blockquote, button, li, a):has(+ .zh) { display: none; }
-  html.lang-zh :is(p, span, div, h1, h2, h3, h4, blockquote, li):has(+ * .zh:first-child) { display: none; }
+  html.lang-zh *:has(> .zh:first-child:last-child) { display: none !important; }
+  html.lang-zh *:has(+ .zh) { display: none !important; }
+  html.lang-zh .zh { color: var(--foreground) !important; opacity: 1 !important; font-size: 1em !important; margin-top: 0 !important; }
 }
