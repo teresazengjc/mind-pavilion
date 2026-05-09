@@ -20,6 +20,97 @@ export const readingPaths = [
   { en: "Love & Solitude", zh: "爱与孤独", count: 7, color: "sage" },
 ];
 
+export const quickStartChips = [
+  { en: "Stability or freedom", zh: "稳定还是自由" },
+  { en: "I feel lost", zh: "我感到迷茫" },
+  { en: "Creative block", zh: "创作瓶颈" },
+  { en: "Relationships", zh: "人际关系" },
+  { en: "Meaning", zh: "意义" },
+];
+
+export const moods = [
+  { key: "reflect", en: "Reflect", zh: "反思", tone: "mist" },
+  { key: "debate", en: "Debate", zh: "辩论", tone: "gold" },
+  { key: "read", en: "Read", zh: "阅读", tone: "sage" },
+  { key: "share", en: "Share", zh: "分享", tone: "mist" },
+];
+
+export const unfinishedQuestions = [
+  { id: "u1", en: "Why do I keep choosing comfort over growth?", zh: "为什么我总在舒适与成长之间选择前者？", thinker: "Nietzsche", lastAt: "yesterday" },
+  { id: "u2", en: "What does it mean to belong to myself?", zh: "属于我自己，意味着什么？", thinker: "Woolf", lastAt: "3d ago" },
+  { id: "u3", en: "Can I love without expectation?", zh: "我能不带期待地去爱吗？", thinker: "Rilke", lastAt: "1w ago" },
+];
+
+export const dailyPrompt = {
+  en: "What is one truth you avoided saying today?",
+  zh: "今天，你有哪一句真心话没有说出口？",
+};
+
+export const meetings = [
+  {
+    id: "m1",
+    en: "Stability or freedom",
+    zh: "稳定还是自由",
+    status: "active",
+    statusEn: "In progress",
+    statusZh: "进行中",
+    thinkers: ["confucius", "nietzsche", "woolf"],
+    insight: "Perhaps the question is not stability or freedom, but what kind of inner room each choice allows.",
+    insightZh: "也许问题不是稳定或自由，而是每一种选择允许你居住在怎样的内在房间里。",
+    next: "Invite Laozi to join",
+    nextZh: "邀请老子加入",
+    updated: "2h",
+  },
+  {
+    id: "m2",
+    en: "Why does success feel empty?",
+    zh: "为什么成功让人感到空虚？",
+    status: "paused",
+    statusEn: "Paused",
+    statusZh: "暂停",
+    thinkers: ["socrates", "jung"],
+    insight: "Success is a mirror — it reflects back only what you brought into it.",
+    insightZh: "成功是一面镜子——它只会映出你带进去的东西。",
+    next: "Summarize so far",
+    nextZh: "总结到此为止",
+    updated: "yesterday",
+  },
+  {
+    id: "m3",
+    en: "Can solitude become a home?",
+    zh: "孤独可以成为家吗？",
+    status: "complete",
+    statusEn: "Closed",
+    statusZh: "已结",
+    thinkers: ["rilke", "laozi"],
+    insight: "Solitude becomes home the moment you stop trying to leave it.",
+    insightZh: "当你不再试图离开它的那一刻，孤独便成了家。",
+    next: "Save 3 quotes",
+    nextZh: "收藏 3 句金句",
+    updated: "3d",
+  },
+];
+
+export const followups = [
+  { en: "What would change if I trusted that?", zh: "如果我相信这一点，会有什么改变？" },
+  { en: "Where did this belief begin?", zh: "这种信念是从哪里开始的？" },
+  { en: "What am I afraid to lose?", zh: "我害怕失去什么？" },
+];
+
+export const themes = [
+  { en: "Freedom", zh: "自由", weight: 92 },
+  { en: "Belonging", zh: "归属", weight: 78 },
+  { en: "Creativity", zh: "创造力", weight: 64 },
+  { en: "Solitude", zh: "孤独", weight: 51 },
+  { en: "Fear", zh: "恐惧", weight: 38 },
+];
+
+export const growingSignals = [
+  { en: "You ask softer questions about love.", zh: "你对爱的提问越来越温柔。" },
+  { en: "Your reflections are 32% longer than last month.", zh: "你的反思比上个月长了 32%。" },
+  { en: "You return to Rilke more than any other voice.", zh: "你回到里尔克的次数超过任何一个声音。" },
+];
+
 export const feedItems = [
   {
     id: "f1",
@@ -66,9 +157,15 @@ export const feedItems = [
 ];
 
 export const feedTabs = [
-  { key: "rec", en: "Recommended", zh: "推荐" },
+  { key: "rec", en: "For You", zh: "推荐" },
   { key: "follow", en: "Following", zh: "关注" },
-  { key: "topic", en: "Topics", zh: "话题" },
-  { key: "thinker", en: "Thinkers", zh: "前人" },
-  { key: "mine", en: "Mine", zh: "我的" },
+  { key: "questions", en: "Questions", zh: "问题" },
+  { key: "quotes", en: "Quotes", zh: "金句" },
+];
+
+export const composeActions = [
+  { key: "question", en: "Share a question", zh: "分享一个问题", tone: "mist" },
+  { key: "quote", en: "Share a quote", zh: "分享一句金句", tone: "gold" },
+  { key: "reflection", en: "Share a reflection", zh: "分享一段反思", tone: "sage" },
+  { key: "book", en: "Share a book", zh: "分享一本书", tone: "mist" },
 ];
