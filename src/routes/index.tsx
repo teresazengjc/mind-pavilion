@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Sparkles, ArrowRight, Mic, Flame, Sprout, Sun, Moon, Cloud, BookOpen, Users, MessagesSquare, Share2, ChevronRight } from "lucide-react";
+import { Sparkles, ArrowRight, Mic, Flame, Sprout, Sun, Moon, Cloud, Users, MessagesSquare, Share2, ChevronRight } from "lucide-react";
 import { thinkers } from "@/data/thinkers";
 import { quickStartChips, moods, unfinishedQuestions, dailyPrompt, hotQuestions } from "@/data/feedData";
 import { useAgora } from "@/store/useAgora";
