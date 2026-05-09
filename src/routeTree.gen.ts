@@ -15,6 +15,7 @@ import { Route as SelfRouteImport } from './routes/self'
 import { Route as ReflectionRouteImport } from './routes/reflection'
 import { Route as ReadingPathRouteImport } from './routes/reading-path'
 import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as GreatMindsRouteImport } from './routes/great-minds'
@@ -51,6 +52,11 @@ const ReadingPathRoute = ReadingPathRouteImport.update({
 const QuotesRoute = QuotesRouteImport.update({
   id: '/quotes',
   path: '/quotes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingsRoute = MeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LibraryRoute = LibraryRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/library': typeof LibraryRoute
+  '/meetings': typeof MeetingsRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/library': typeof LibraryRoute
+  '/meetings': typeof MeetingsRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/great-minds': typeof GreatMindsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/library': typeof LibraryRoute
+  '/meetings': typeof MeetingsRoute
   '/quotes': typeof QuotesRoute
   '/reading-path': typeof ReadingPathRoute
   '/reflection': typeof ReflectionRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/great-minds'
     | '/how-it-works'
     | '/library'
+    | '/meetings'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/great-minds'
     | '/how-it-works'
     | '/library'
+    | '/meetings'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/great-minds'
     | '/how-it-works'
     | '/library'
+    | '/meetings'
     | '/quotes'
     | '/reading-path'
     | '/reflection'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   GreatMindsRoute: typeof GreatMindsRoute
   HowItWorksRoute: typeof HowItWorksRoute
   LibraryRoute: typeof LibraryRoute
+  MeetingsRoute: typeof MeetingsRoute
   QuotesRoute: typeof QuotesRoute
   ReadingPathRoute: typeof ReadingPathRoute
   ReflectionRoute: typeof ReflectionRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/quotes'
       fullPath: '/quotes'
       preLoaderRoute: typeof QuotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meetings': {
+      id: '/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof MeetingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/library': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   GreatMindsRoute: GreatMindsRoute,
   HowItWorksRoute: HowItWorksRoute,
   LibraryRoute: LibraryRoute,
+  MeetingsRoute: MeetingsRoute,
   QuotesRoute: QuotesRoute,
   ReadingPathRoute: ReadingPathRoute,
   ReflectionRoute: ReflectionRoute,
@@ -313,3 +334,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
